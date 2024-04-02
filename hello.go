@@ -1,16 +1,27 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
-const ENGLISH_HELLO_PREFIX = "Hello, "
+var HELLO_IN_LANGUAGES = map[string]string{
+	"english": "Hello",
+	"bisaya":  "Hoy",
+}
 
-func Hello(n string) string {
+func Hello(n, language string) string {
 	if n == "" {
-		return "Hello, World"
+		n = "World"
 	}
-	return fmt.Sprintf("%s%s", ENGLISH_HELLO_PREFIX, n)
+
+	prefix := HELLO_IN_LANGUAGES[language]
+	if prefix == "" {
+		prefix = HELLO_IN_LANGUAGES["english"]
+	}
+
+	return fmt.Sprintf("%s, %s", prefix, n)
 }
 
 func main() {
-	fmt.Println(Hello("Chris"))
+	fmt.Println(Hello("Chris", ""))
 }
