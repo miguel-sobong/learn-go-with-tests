@@ -95,3 +95,4 @@ func (g *GameSpy) Start(numberOfPlayers int, alertDestination io.Writer) {
 func (g *GameSpy) Finish(winner string) {
 	g.FinishedWith = winner
 }
+

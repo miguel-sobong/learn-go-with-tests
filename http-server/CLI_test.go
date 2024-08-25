@@ -67,9 +67,7 @@ func TestCLI(t *testing.T) {
 			t.Errorf("got %q, want %q", gotPrompt, wantPrompt)
 		}
 
-		if game.StartedWith != 7 {
-			t.Errorf("wanted Start called with 7 but got %d", game.StartedWith)
-		}
+		AssertGameStartedWith(t, game, 7)
 	})
 
 	t.Run("it prints an error when a non numeric value is entered and does not start the game", func(t *testing.T) {
@@ -130,5 +128,11 @@ func assertGameShouldNotStart(t testing.TB, game *poker.GameSpy) {
 
 	if game.StartCalled {
 		t.Errorf("game should not have started")
+	}
+}
+
+func AssertGameStartedWith(t testing.TB, game *poker.GameSpy, expected int) {
+	if game.StartedWith != expected {
+		t.Errorf("wanted Start called with %d but got %d", expected, game.StartedWith)
 	}
 }
