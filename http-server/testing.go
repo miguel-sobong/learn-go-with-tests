@@ -1,6 +1,7 @@
 package poker
 
 import (
+	"io"
 	"net/http/httptest"
 	"reflect"
 	"testing"
@@ -86,7 +87,7 @@ type GameSpy struct {
 	StartCalled  bool
 }
 
-func (g *GameSpy) Start(numberOfPlayers int) {
+func (g *GameSpy) Start(numberOfPlayers int, alertDestination io.Writer) {
 	g.StartedWith = numberOfPlayers
 	g.StartCalled = true
 }
