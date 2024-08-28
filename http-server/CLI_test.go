@@ -40,7 +40,7 @@ func TestCLI(t *testing.T) {
 		cli := poker.NewCLI(in, dummyStdOut, game)
 		cli.PlayPoker()
 
-		assertGameWinner(t, game.FinishedWith, "Chris")
+		assertGameWinner(t, game.FinishCalledWith, "Chris")
 	})
 
 	t.Run("record cleo win from user input", func(t *testing.T) {
@@ -50,7 +50,7 @@ func TestCLI(t *testing.T) {
 		cli := poker.NewCLI(in, dummyStdOut, game)
 		cli.PlayPoker()
 
-		assertGameWinner(t, game.FinishedWith, "Cleo")
+		assertGameWinner(t, game.FinishCalledWith, "Cleo")
 	})
 
 	t.Run("it prompts the user to enter the number of players and starts the game", func(t *testing.T) {
@@ -132,7 +132,7 @@ func assertGameShouldNotStart(t testing.TB, game *poker.GameSpy) {
 }
 
 func AssertGameStartedWith(t testing.TB, game *poker.GameSpy, expected int) {
-	if game.StartedWith != expected {
-		t.Errorf("wanted Start called with %d but got %d", expected, game.StartedWith)
+	if game.StartCalledWith != expected {
+		t.Errorf("wanted Start called with %d but got %d", expected, game.StartCalledWith)
 	}
 }

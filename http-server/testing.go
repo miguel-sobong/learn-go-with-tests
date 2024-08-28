@@ -82,17 +82,20 @@ func AssertContentType(t testing.TB, response *httptest.ResponseRecorder, want s
 }
 
 type GameSpy struct {
-	StartedWith  int
-	FinishedWith string
-	StartCalled  bool
+	StartCalled     bool
+	StartCalledWith int
+	BlindAlert      []byte
+
+	FinishedCalled   bool
+	FinishCalledWith string
 }
 
 func (g *GameSpy) Start(numberOfPlayers int, alertDestination io.Writer) {
-	g.StartedWith = numberOfPlayers
+	g.StartCalledWith = numberOfPlayers
 	g.StartCalled = true
+	alertDestination.Write(g.BlindAlert)
 }
 
 func (g *GameSpy) Finish(winner string) {
-	g.FinishedWith = winner
+	g.FinishCalledWith = winner
 }
-
